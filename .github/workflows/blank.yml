@@ -1,32 +1,32 @@
-name: corrida de Newman
+name: Newman run
 
 on:
   push:
     branches:
-      - main
-
+      - main 
+      
 jobs:
   newman:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
-
-      - name: Criar diretório para relatório
+      
+      - name: Create dir for report
         run: |
-          mkdir testArtefatos
-
-      - name: Install Newman
+          mkdir testArtifacts
+          
+      - name: Istall Newman
         run: |
           npm install -g newman
           npm install -g newman-reporter-htmlextra
-
-      - name: Executar teste
-        run: |
-          newman run ServeRest.postman_collection.json -e serveRest_env.postman_environment.json -r cli,htmlextra
-
-      - name: Upload Relatório
-        uses: actions/upload-artifact@v3
+          
+      - name: Run Test
+        run: newman run ServeRest.postman_collection.json -e serveRest_env.postman_environment.json -r cli,htmlextra
+        
+      - name: Report
+        uses: actions/upload-artifact@v3.1.2
         with:
-          name: Relatórios
-          path: testArtefatos
-
+          name: Reports
+          path: newman
+        
+        
